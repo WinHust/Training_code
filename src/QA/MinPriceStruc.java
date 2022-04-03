@@ -25,22 +25,13 @@ public class MinPriceStruc {
                     }
                 }
             }
-            int chiphi = 0;
-            int[] data2 = new int[1000];
-            int[] data3 = new int[1000];
-            int count = 0;
+            int chiphi;
+            int min_price = Integer.MAX_VALUE;
+            int kqtang = 0;
             for (int tang = 0; tang <= max; tang++) {
-                if (chiphi != 0) {
-                    chiphi = 0;
-                }
-                if (count != 0) {
-                    count = 0;
-                }
+                chiphi = 0;
                 for (int i = 0; i < hang; i++) {
                     for (int j = 0; j < cot; j++) {
-                        if (tang == data1[i][j]) {
-                            count++;
-                        }
                         if (tang >= data1[i][j]) {
                             int chiphixaythem = (tang - data1[i][j]) * 2;
                             chiphi = chiphi + chiphixaythem;
@@ -50,26 +41,15 @@ public class MinPriceStruc {
                         }
                     }
                 }
-                data3[tang] = count;
-                data2[tang] = chiphi;
+
+                if (min_price > chiphi) {
+                    min_price = chiphi;
+                    kqtang = tang;
+                }
+
             }
 
-            int mincost = data2[0];
-            int tangperfect = 0;
-            for (int i = 0; i < 1000; i++) {
-                if (mincost >= data2[i] & data2[i] != 0) {
-                    mincost = data2[i];
-                    tangperfect = i;
-                }
-                if (data2[i] == 0 & data3[i] == (hang * cot)) {
-                    mincost = 0;
-                    tangperfect = i;
-                }
-            }
-            System.out.println("chi phi thap nhat la xay tat ca: " + tangperfect + " tang voi gia: " + mincost);
+            System.out.println("chi phi thap nhat la xay tat ca: " + kqtang + " tang voi gia: " + min_price + "$");
         }
-
     }
 }
-
-
